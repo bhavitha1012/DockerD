@@ -13,12 +13,6 @@ node {
         app = docker.build("anandr72/nodeapp")
     }
 
-    stage('Test image') {
-        
-        app.inside {
-            echo "Tests passed"
-        }
-    }
 
     stage('Push image') {
         /* 
