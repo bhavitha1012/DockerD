@@ -1,4 +1,4 @@
-
+properties([parameters([choice(choices: ['master', 'branch-1'], description: 'Select branch to build', name: 'branch')])])
 node {
     def app
 
