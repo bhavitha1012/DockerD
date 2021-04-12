@@ -1,9 +1,10 @@
+properties([parameters([choice(choices: ['master', 'branch-1', 'branch-2'], description: 'Select branch to build image', name: 'branch')])])
 node {
     def app
 
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
-
+	    echo "Pulling changes from the branch ${params.branch}"
         checkout scm
     }
 
