@@ -11,7 +11,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("798167/master-image")
+        app = docker.build("798167/branch-1-image")
     }
 
 
