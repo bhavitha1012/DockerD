@@ -8,8 +8,8 @@ pipeline
 {
   environment
   {
-    imagename = "yenigul/hacicenkins"
-    registryCredential = 'yenigul-dockerhub'
+    imagename = "798167/declareimage"
+    registryCredential = 'dockerHub'
     dockerImage = ''
   }
     agent any
