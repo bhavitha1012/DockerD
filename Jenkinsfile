@@ -4,29 +4,38 @@ return gettags.text.readLines().collect {
 }
 ''']]]])])
 
-pipeline {
-  environment {
-    imagename = "798167/newimage"
-    registryCredential = 'dockerHub'
+pipeline
+{
+  environment
+  {
+    imagename = "yenigul/hacicenkins"
+    registryCredential = 'yenigul-dockerhub'
     dockerImage = ''
   }
-  agent any
-  stages {
-    stage('Cloning Git') {
+    agent any
+    stages{
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
+	    echo "Pulling changes from the branch ${params.branch}"
       steps {
-        git([url: 'https://github.com/bhavitha1012/DockerD.git', branch: 'master', credentialsId: ''])
-
-      }
+        git([url: 'https://github.com/ismailyenigul/hacicenkins.git', branch: 'master', credentialsId: 'ismailyenigul-github-user-token'  
     }
-    stage('Building image') {
-      steps{
+    }
+    stage('Build image') {
+        /* This builds the actual image */
+        steps{
         script {
           dockerImage = docker.build imagename
         }
       }
     }
-    stage('Deploy Image') {
-      steps{
+
+
+    stage('Push image') {
+        /* 
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        steps{
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push("$BUILD_NUMBER")
@@ -36,12 +45,5 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
-
-      }
-    }
-  }
+   }
 }
