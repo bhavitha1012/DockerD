@@ -3,6 +3,7 @@ return gettags.text.readLines().collect {
   it.split()[1].replaceAll(\'refs/heads/\', \'\').replaceAll(\'refs/tags/\', \'\').replaceAll("\\\\^\\\\{\\\\}", \'\')
 }
 ''']]]])])
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]])
 node {
     def app
 
