@@ -8,7 +8,7 @@ pipeline
 {
   environment
   {
-    imagename = "798167/declareimage"
+    imagename = "798167/declareimage-branch1"
     registryCredential = 'dockerHub'
     dockerImage = ''
   }
