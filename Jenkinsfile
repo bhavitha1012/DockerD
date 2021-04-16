@@ -3,7 +3,6 @@ return gettags.text.readLines().collect {
   it.split()[1].replaceAll(\'refs/heads/\', \'\').replaceAll(\'refs/tags/\', \'\').replaceAll("\\\\^\\\\{\\\\}", \'\')
 }
 ''']]]])])
-
 pipeline
 {
   environment
@@ -15,10 +14,8 @@ pipeline
     agent any
     stages{
     stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-	    
       steps {
-        checkout([$class: 'GitSCM', branches: [[name: '$branch']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]]) 
+        checkout([$class: 'GitSCM', branches: [[name: "$branch"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]]) 
     }
     }
     stage('Build image') {
@@ -29,12 +26,7 @@ pipeline
         }
       }
     }
-
-
     stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
         steps{
         script {
           docker.withRegistry( '', registryCredential ) {
