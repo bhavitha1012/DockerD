@@ -16,7 +16,7 @@ pipeline
     stages{
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
-	    echo "Pulling changes from the branch ${params.branch}"
+	    
       steps {
         git 'https://github.com/bhavitha1012/DockerD.git' 
     }
