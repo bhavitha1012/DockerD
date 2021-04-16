@@ -18,7 +18,7 @@ pipeline
         /* Cloning the Repository to our Workspace */
 	    
       steps {
-        git 'https://github.com/bhavitha1012/DockerD.git' 
+        checkout([$class: 'GitSCM', branches: [[name: '$branch']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]]) 
     }
     }
     stage('Build image') {
