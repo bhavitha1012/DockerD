@@ -4,30 +4,44 @@ return gettags.text.readLines().collect {
 }
 ''']]]])])
 
-node {
-    def app
+pipeline {
+  environment {
+    imagename = "798167/newimage"
+    registryCredential = 'dockerHub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git([url: 'https://github.com/bhavitha1012/DockerD.git', branch: 'master', credentialsId: ''])
 
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-	    echo "Pulling changes from the branch ${params.branch}"
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]])
+      }
     }
-
-    stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("798167/branch-6-image")
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build imagename
+        }
+      }
     }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+             dockerImage.push('latest')
 
-
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
+          }
+        }
+      }
     }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+         sh "docker rmi $imagename:latest"
+
+      }
+    }
+  }
 }
