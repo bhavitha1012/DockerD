@@ -18,7 +18,7 @@ pipeline
         /* Cloning the Repository to our Workspace */
 	    echo "Pulling changes from the branch ${params.branch}"
       steps {
-        git([url: 'https://github.com/ismailyenigul/hacicenkins.git', branch: 'master', credentialsId: 'ismailyenigul-github-user-token'  
+        git 'https://github.com/bhavitha1012/DockerD.git' 
     }
     }
     stage('Build image') {
