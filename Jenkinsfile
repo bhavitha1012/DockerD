@@ -1,6 +1,6 @@
 def code
 
-node('java-agent') {
+node('master') {
   stage('Checkout') {
     checkout scm
   }
@@ -10,6 +10,6 @@ node('java-agent') {
   }
 
   stage('Execute') {
-    code.example1()
+    code.func()
   }
 }
