@@ -1,46 +1,16 @@
-properties([parameters([[$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT', description: '', filterLength: 1, filterable: false, name: 'Branch', randomName: 'choice-parameter-67197861867200', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: ''], script: [classpath: [], sandbox: false, script: '''def gettags = ("git ls-remote -t -h https://github.com/bhavitha1012/DockerD.git").execute()
-return gettags.text.readLines().collect { 
-  it.split()[1].replaceAll(\'refs/heads/\', \'\').replaceAll(\'refs/tags/\', \'\').replaceAll("\\\\^\\\\{\\\\}", \'\')
-}
-''']]]])])
-pipeline
-{
-  environment
-  {
-    imagename = "798167/declare-image-branch1"
-    registryCredential = 'dockerHub'
-    dockerImage = ''
-  }
-    agent any
-    stages{
-    stage('Clone repository') {
-      steps {
-        checkout([$class: 'GitSCM', branches: [[name: "$branch"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavitha1012/DockerD.git']]]) 
-    }
-    }
-    stage('Build image') {
-        /* This builds the actual image */
-        steps{
-        script {
-          int exitcode = 0
-          for (slave in hudson.model.Hudson.instance.slaves) {
-            if (slave.getComputer().isOffline().toString() == "true"){
-               println('Slave ' + slave.name + " is offline."); 
-            }
-         }
-        }
-      }
-    }
-    stage('Push image') {
-        steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
+def code
 
-          }
-        }
-      }
-    }
-   }
+node('master') {
+  stage('Checkout') {
+    checkout scm
+  }
+
+  stage('Load') {
+    code = load 'monitor.groovy'
+  }
+
+  stage('Execute') {
+    code.func()
+  }
 }
+
