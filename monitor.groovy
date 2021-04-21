@@ -6,3 +6,4 @@ for (slave in hudson.model.Hudson.instance.slaves) {
  }
 }
 }
+return this
