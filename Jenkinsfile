@@ -10,7 +10,7 @@ node('master') {
   }
 
   stage('Execute') {
-    //code.func()
+    code.func()
   }
 }
 
