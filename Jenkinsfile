@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['New job ', 'Docker-J', 'DockerBuild', 'Active-param'], description: 'Select job to give access to', name: 'jobs')])])
+properties([parameters([choice(choices: ['New job ', 'Docker-J', 'DockerBuild', 'Active-param','Build], description: 'Select job to give access to', name: 'jobs')])])
 def code
 
 node('master') {
