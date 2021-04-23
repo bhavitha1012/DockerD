@@ -11,7 +11,7 @@ node('master') {
   }
 
   stage('Execute') {
-    code.rest()
+    code.rest(jobs)
   }
 }
 
