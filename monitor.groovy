@@ -7,7 +7,7 @@ import hudson.model.User
 
   def rest(){
     //getting the names of the jobs
-    def jobNames = []
+    def jobNames = ${jobs}
     Jenkins.instance.getAllItems(AbstractItem.class).each { 
   jobNames.add(it.fullName) 
 }
