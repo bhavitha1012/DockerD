@@ -5,7 +5,7 @@ import hudson.security.*
 import hudson.model.User   
 
 
-  def rest(){
+  def rest(jobs){
     //getting the names of the jobs
     def jobNames = []
     Jenkins.instance.getAllItems(AbstractItem.class).each { 
