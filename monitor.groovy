@@ -11,10 +11,11 @@ import hudson.model.User
     Jenkins.instance.getAllItems(AbstractItem.class).each { 
   jobNames.add(it.fullName) 
 }
-
+def jobs1=[]
+    jobs1.add(jobs)
 // For each project
 for(item in Hudson.instance.items) {
-  for(jobName in jobNames){
+  for(jobName in jobs1){
     if(item.name.equalsIgnoreCase(jobName))
     {
         Set<String> users = new HashSet<>();
