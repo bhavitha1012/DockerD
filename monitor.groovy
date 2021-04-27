@@ -3,14 +3,14 @@ import jenkins.security.*
 import jenkins.model.*
 import hudson.security.*
 import hudson.model.User   
-  def rest(arg_jobname){
+  def rest(job){
     //getting the names of the jobs
     def jobNames = []
     Jenkins.instance.getAllItems(AbstractItem.class).each { 
   jobNames.add(it.fullName) 
 }
     def jobName_dynamic = []
-    jobName_dynamic.add(arg_jobname)
+    jobName_dynamic.add(job)
 // For each project
 for(item in Hudson.instance.items) {
   for(jobName in jobName_dynamic){
