@@ -32,6 +32,7 @@ for(item in Hudson.instance.items) {
        newPermissions.put(Item.CONFIGURE, users);
        newPermissions.put(Item.DELETE, users);
        newPermissions.put(Item.READ, users);
+      newPermissions.put(com.cloudbees.plugins.credentials.CredentialsProvider.VIEW, users);
        item.addProperty(new AuthorizationMatrixProperty(newPermissions))
        item.save()
     }
