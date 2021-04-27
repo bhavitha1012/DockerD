@@ -1,9 +1,9 @@
 properties([parameters([[$class: 'ChoiceParameter', choiceType: 'PT_MULTI_SELECT', description: '', filterLength: 1, filterable: false, name: 'Jobs', randomName: 'choice-parameter-85117531329500', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: ''], script: [classpath: [], sandbox: false, script: '''import jenkins.model.*
 import hudson.model.*
-def job=[]
+def jobNames=[]
 Jenkins.instance.getAllItems(AbstractItem.class).each
-{ job.add(it.fullName) };
-return job''']]]])])
+{ jobNames.add(it.fullName) };
+return jobNames''']]]])])
 def code
 
 node('master') {
