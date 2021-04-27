@@ -9,7 +9,7 @@ node{
     checkout scm
   }
   stage('Load') {
-    test = load 'job.groovy'
+    test = load 'monitor.groovy'
   }
   stage('Execute') {
     test.rest(job)
