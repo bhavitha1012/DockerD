@@ -5,14 +5,14 @@ import hudson.security.*
 import hudson.model.User   
 
 
-  def rest(jobs){
+  def rest(Jobs){
     //getting the names of the jobs
     def jobNames = []
     Jenkins.instance.getAllItems(AbstractItem.class).each { 
   jobNames.add(it.fullName) 
 }
 def jobs1=[]
-    jobs1.add(jobs)
+    jobs1.add(Jobs)
 // For each project
 for(item in Hudson.instance.items) {
   for(jobName in jobs1){
