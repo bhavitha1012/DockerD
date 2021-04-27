@@ -12,6 +12,6 @@ node{
     test = load 'monitor.groovy'
   }
   stage('Execute') {
-    test.rest(job)
+    test.rest(arg_jobname)
   }
 }
