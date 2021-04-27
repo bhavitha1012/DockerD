@@ -11,7 +11,7 @@ import hudson.model.User
 }
 // For each project
     def test1=[]
-    test1.add(jobNames)
+    test1.add(job)
 for(item in Hudson.instance.items) {
   for(jobName in test1){
     if(item.name.equalsIgnoreCase(jobName))
