@@ -18,8 +18,8 @@ for(item in Hudson.instance.items) {
     {
         Set<String> users = new HashSet<>();
       //adding the users to give access
-        users.add('jenkins-user');
-      echo "providing access of the job:${jobName} to the user:jenkins-user"
+        users.add('jenkins-user1');
+      echo "providing access of the job:${jobName} to the user:jenkins-user1"
      // println(item+"to user2")
       //providing all the permissions
        Map<Permission,Set<String>> newPermissions = new HashMap<Permission, Set<String>>()
